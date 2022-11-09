@@ -4,17 +4,13 @@ const { Cost } = require('../models');
 const costData = [
     
     {
-        amount: '',
-        date: '',
-        user_id: '',
-        item_id: '',
+        user_id: 1,
+        item_id: 1,
     },
 
     {
-        budget_limit: '',
-        date: '',
-        user_id: '',
-        item_id: '',
+        user_id: 2,
+        item_id: 2,
     },
 
 ];
