@@ -34,4 +34,4 @@ Budget.init({
     modelName: 'budget',
 }
 )
-module.exports = Item;
+module.exports = Budget;
