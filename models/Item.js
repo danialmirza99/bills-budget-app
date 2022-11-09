@@ -25,10 +25,11 @@ Item.init({
     },
     cost_id:{
         references: {
-            model: 'user',
+            model: 'cost',
             key: 'id'
           }
-    }
+    },
+    
 
 },
 {

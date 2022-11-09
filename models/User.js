@@ -19,7 +19,7 @@ User.init({
       password: {
         type: DataTypes.STRING,
         allowNull: false,
-        //make sure pass has min of 8chars
+        //make sure pass has min of 8chars and is alphanumeric
         validate: {
             isAlphanumeric: true,
             len: [8],
@@ -34,3 +34,4 @@ User.init({
         modelName: 'user',
     }
 )
+module.exports = User;
