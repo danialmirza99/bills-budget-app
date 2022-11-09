@@ -29,6 +29,12 @@ Item.init({
             key: 'id'
           }
     },
+    user_id:{
+        references: {
+            model: 'user',
+            key: 'id'
+          }
+    },
     
 
 },
