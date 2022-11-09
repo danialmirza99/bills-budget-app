@@ -10,22 +10,24 @@ Cost.init({
         primaryKey: true,
         autoIncrement: true,
     },
-    amount:{
-        type: DataTypes.DECIMAL,
-        allowNull:false
-    },
-    date:{
-        type: DataTypes.STRING,
-        allowNull: false,
+    // amount:{
+    //     type: DataTypes.DECIMAL,
+    //     allowNull:false
+    // },
+    // date:{
+    //     type: DataTypes.STRING,
+    //     allowNull: false,
 
-    },
+    // },
     user_id:{
+        type: DataTypes.INTEGER,
         references: {
             model: 'user',
             key: 'id'
         }
     },
     item_id:{
+        type: DataTypes.INTEGER,
         references: {
             model: 'item',
             key: 'id'

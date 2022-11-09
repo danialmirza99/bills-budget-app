@@ -12,7 +12,7 @@ Budget.init({
         autoIncrement: true,
     },
     budget_limit:{
-        type: DataTypes.DECIMAL,
+        type: DataTypes.DECIMAL(10,2),
         allowNull:false
     },
     date:{
@@ -20,9 +20,11 @@ Budget.init({
         allowNull: false,
     },
     user_id:{
+        type: DataTypes.INTEGER,
         references: {
             model: 'user',
-            key: 'id'
+            key: 'id',
+            unique:false
           }
     }
 },

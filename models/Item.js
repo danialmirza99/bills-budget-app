@@ -20,21 +20,23 @@ Item.init({
 
     },
     amount:{
-        type: DataTypes.DECIMAL,
+        type: DataTypes.DECIMAL(10,2),
         allowNull:false
     },
-    cost_id:{
-        references: {
-            model: 'cost',
-            key: 'id'
-          }
-    },
-    user_id:{
-        references: {
-            model: 'user',
-            key: 'id'
-          }
-    },
+    // cost_id:{
+    //     type: DataTypes.INTEGER,
+    //     references: {
+    //         model: 'cost',
+    //         key: 'id'
+    //       }
+    // },
+    // user_id:{
+    //     type: DataTypes.INTEGER,
+    //     references: {
+    //         model: 'user',
+    //         key: 'id'
+    //       }
+    // },
     
 
 },

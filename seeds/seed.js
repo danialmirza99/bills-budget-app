@@ -9,10 +9,13 @@ const seedAll = async () => {
 
     await sequelize.sync({ force : true});
 
-    await seedBudget();
-    await seedCost();
-    await seedItem();
     await seedUser();
+
+    await seedBudget();
+
+    await seedItem();
+    await seedCost();
+
 
 };
 
