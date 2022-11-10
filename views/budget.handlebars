@@ -1,0 +1,18 @@
+<div class="total-budget">
+    <h2> Your total budget is {{budget.budget_limit}} $ </h2>
+</div>
+
+
+<div class="current-budget">
+    <h2> Your remaining budget is {{#subtract item.amount}}{{budget.budget_limit}}{{/subtract item.amount}} $ </h2>
+</div>
+
+
+<div class="update-budget" >
+    <input class="form-text form-control form-control-sm col-12" placeholder="Enter new budget" name="budget" id="updateBudget"
+        type="text"></input>
+    <button type="button" class="btn btn-success" id="submit"> Update Budget </button>
+</div>
+
+
+<script src="./js/update-budget.js"></script>
