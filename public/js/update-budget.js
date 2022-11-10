@@ -13,7 +13,7 @@ const updateBudgetHandler = async (event) => {
         });
 
         if (response.ok) {
-            document.location.replace('/budget');
+            document.location.replace('/api/budget');
         } else {
             // alert(response.statusText);
             new Noty({
