@@ -1,4 +1,4 @@
-const Noty = require('noty');
+// const Noty = require('noty');
 
 const updateBudgetHandler = async (event) => {
     event.preventDefault();
@@ -15,12 +15,12 @@ const updateBudgetHandler = async (event) => {
         if (response.ok) {
             document.location.replace('/api/budget');
         } else {
-            // alert(response.statusText);
-            new Noty({
-                theme: 'bootstrap-v4',
-                text     : response.statusText,
-                container: '.custom-container'
-            }).show();
+            alert(response.statusText);
+            // new Noty({
+            //     theme: 'bootstrap-v4',
+            //     text     : response.statusText,
+            //     container: '.custom-container'
+            // }).show();
         }
     }
 };
