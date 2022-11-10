@@ -10,20 +10,20 @@
     </head>
 
     <body>
-        <div>
-            <header>
-                <h1>
-                    Bill$ Budget App
-                </h1>
-                <nav>
-                    {{#if logged_in}}
-                    <a href="/profile">profile</a> |
-                    <button class="no-button" id="logout">logout</button>
-                    {{else}}
-                    <a href="/login">login</a>
-                    {{/if}}
-                </nav>
-            </header>
+        
+    <div class="navbar">
+        <nav>
+            
+               <h2> Bill$ Budget App</h2>
+                {{#if logged_in}} 
+                <a class="link" href="/profile">Profile</a>
+                <button class="no-button" id="logout">logout</button>
+                 {{else}} 
+                <a class="link" href="/login">Login</a>
+                 {{/if}} 
+                   
+        </nav>          
+    </div>
 
             <main>
                 {{{ body }}}
@@ -31,7 +31,7 @@
             <footer>
                 {{!-- TODO --}}
             </footer>
-        </div>
+        
 
         {{#if logged_in}}
         <script src="/js/logout.js"></script>
