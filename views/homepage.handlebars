@@ -1,11 +1,4 @@
-<html>
-<head>
-    <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
-    <link rel="stylesheet" href="/node_modules/tui-time-picker/dist/tui-time-picker.css" />
-    <link rel="stylesheet" href="/node_modules/tui-date-picker/dist/tui-date-picker.css" />
-    <link rel="stylesheet" href="/node_modules/tui-calendar/dist/tui-calendar.min.css" />
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-grid.min.css" />
-</head>
+
 {{!-- {{#each budgetCalendar as |calendar| }} --}}
     <h2>Welcome To The Bill$ Budget App!</h2>
     <div class="update-budget">
@@ -16,33 +9,8 @@
         <button class="btn btn-primary" type="submit">Add any purchases</button>
         {{!-- add button to add purchases --}}
     </div>
-    <header class="header">
-        <nav class="navbar">
-          <button class="button is-rounded today">Today</button>
-          <button class="button is-rounded prev">
-            <img alt="prev" src="./images/ic-arrow-line-left.png" srcset="./images/ic-arrow-line-left@2x.png 2x, ./images/ic-arrow-line-left@3x.png 3x">
-          </button>
-          <button class="button is-rounded next">
-            <img alt="prev" src="./images/ic-arrow-line-right.png" srcset="
-                ./images/ic-arrow-line-right@2x.png 2x,
-                ./images/ic-arrow-line-right@3x.png 3x
-              ">
-          </button>
-          <span class="navbar--range"></span>
-        </nav>
-      </header>
-      <main id="app"></main>
-      <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="/node_modules/tui-code-snippet/dist/tui-code-snippet.min.js"></script>
-    <script src="/node_modules/tui-time-picker/dist/tui-time-picker.min.js"></script>
-    <script src="/node_modules/tui-date-picker/dist/tui-date-picker.min.js"></script>
-    <script src="/node_modules/tui-calendar/dist/tui-calendar.min.js"></script>
-    <script src="../public/js/calendar.js"></script>
-    <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
-    <script src="https://uicdn.toast.com/calendar /latest/toastui-calendar.min.js"></script>
+    <div id="calendar" style="height: 600px"></div>
+    <script src="/js/calendar.js"></script>
     <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.ie11.min.js"></script>
-    {{#each scripts}}
-        <script src="{{script}}"></script>
-    {{/each}}
+      
 {{!-- {{/each}} --}}
-</html>
