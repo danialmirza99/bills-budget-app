@@ -40,23 +40,35 @@ router.get('/login', (req, res) => {
 
 });
 
-// router.get('/budget/:id', async (req, res) => {
-//     try{
-//         const budgetData = await Budget.findByPk(req.params.id, {
-//             include: [
-//                 {
-//                     model: User,
-//                     attributes: ['username'],
-//                 },
-//             ],
-//         });
-//         const calendar = budgetData.get({ plain: true});
-//         res.render('calendar', { ...calendar,logged_in:req.session.logged_in});
-//     }
-//     catch (err) {
-//         res.status(500).json(err);
-//     }
-// })
+
+router.get('/budget', withAuth, async (req, res) => {
+  try {
+    let today = new Date();
+    let month = today.getMonth() + 1;
+    let year = today.getFullYear();
+
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Budget }, { model: Item }],
+    });
+
+    const user = userData.get({ plain: true });
+    const items = user.items;
+    const dates = items.map((item) => item.due_date);
+
+    const indexArr = func.getIndex(arrDates(dates), year, month);
+
+    const amounts = items.map((item) => item.amount);
+    const cost = func.findAmounts(indexArr, amounts);
+    const remaining = user.budget.budget_limit - cost;
+
+    let total = func.sum(cost);
+    res.render('budget', { ...user, total, remaining });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 router.get('/profile', withAuth, async (req, res) => {
   try {
