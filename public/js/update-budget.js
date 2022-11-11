@@ -1,9 +1,8 @@
-// const Noty = require('noty');
 
 const updateBudgetHandler = async (event) => {
     event.preventDefault();
 
-    const newBudget = documet.querySelector('#updateBudget').value.trim();
+    const newBudget = document.querySelector('#updateBudget').value.trim();
 
     if (newBudget) {
         const response = await fetch('/api/budget', {
@@ -16,11 +15,6 @@ const updateBudgetHandler = async (event) => {
             document.location.replace('/api/budget');
         } else {
             alert(response.statusText);
-            // new Noty({
-            //     theme: 'bootstrap-v4',
-            //     text     : response.statusText,
-            //     container: '.custom-container'
-            // }).show();
         }
     }
 };

@@ -40,7 +40,7 @@ const signupFormHandler = async (event) => {
             alert("Username is taken");
         }
         else{
-            alert("Password must be at least 8 characters and contain letters and numbers ")
+            alert("Password must be at least 8 characters and contain letters and numbers ");
         }
     }
 };
