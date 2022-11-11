@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Budget } = require('../models');
+const { User, Budget, Item, Cost } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -54,13 +54,26 @@ router.get('/profile', withAuth, async (req, res) => {
     try {
       const userData = await User.findByPk(req.session.user_id, {
         attributes: { exclude: ['password'] },
-        include: [{ model: Budget }],
+        include: [{ model: Budget }, {model: Item}],
       });
   
       const user = userData.get({ plain: true });
+      const items = user.items;
+      const amounts = items.map((item) => item.amount);
+
+      const sum = (arr) => {
+        let total = 0;
+        for (let i = 0; i < arr.length; i++) {
+            total += parseFloat(arr[i]);
+        }
+        return total;
+      }
+
+      let total=sum(amounts);
   
       res.render('profile', {
         ...user,
+        total,
         logged_in: true
       });
     } 
