@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { response } = require('express');
 const { User, Budget, Item, Cost } = require('../models');
 const withAuth = require('../utils/auth');
 const func = require('../utils/functions');
@@ -60,14 +61,23 @@ router.get('/budget', withAuth, async (req, res) => {
 
     const amounts = items.map((item) => item.amount);
     const cost = func.findAmounts(indexArr, amounts);
-    const remaining = user.budget.budget_limit - cost;
 
     let total = func.sum(cost);
+    const remaining = user.budget.budget_limit - total;
     res.render('budget', { ...user, total, remaining });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+router.get('/cost', withAuth, async (req, res) => {
+  try {
+    res.render('cost');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+    
 
 
 router.get('/profile', withAuth, async (req, res) => {
