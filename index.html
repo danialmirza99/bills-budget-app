@@ -1,33 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testing Calendar</title>
-    <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
-    <link rel="stylesheet" href="/css/jass.css">
-    <link rel="stylesheet" href="/css/style.css">
+<meta charset='utf-8' />
+<link href='./calendar/lib/main.css' rel='stylesheet' />
+
+
+
 </head>
 <body>
-    <h1>Testing</h1>
-    <header class="header">
-        <nav class="navbar">
-          <button class="button is-rounded today">Today</button>
-          <button class="button is-rounded prev">
-            <img alt="prev" src="./images/ic-arrow-line-left.png" srcset="./images/ic-arrow-line-left@2x.png 2x, ./images/ic-arrow-line-left@3x.png 3x">
-          </button>
-          <button class="button is-rounded next">
-            <img alt="prev" src="./images/ic-arrow-line-right.png" srcset="
-                ./images/ic-arrow-line-right@2x.png 2x,
-                ./images/ic-arrow-line-right@3x.png 3x
-              ">
-          </button>
-          <span class="navbar--range"></span>
-        </nav>
-      </header>
-      <main id="app"></main>
-    <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.ie11.min.js"></script>
-    <script src="./public/js/calendar.js"></script>
+    <h2>Welcome To The Bill$ Budget App!</h2>
+    <div class="update-budget">
+       <button class="btn btn-primary" type="submit">Update Budget</button>
+        {{!-- add button to update budget --}}
+    </div>
+    <div class="add-purchases">
+        <button class="btn btn-primary" type="submit">Add any purchases</button>
+        {{!-- add button to add purchases --}}
+    </div>
+    <div id='calendar'></div>
+    <script src="/public/js/calendar.js"></script>
+    <script src='/calendar/lib/main.js'></script>
 </body>
 </html>

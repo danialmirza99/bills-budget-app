@@ -1,5 +1,5 @@
 
-{{!-- {{#each budgetCalendar as |calendar| }} --}}
+{{!-- {{#each budgetCalendar as |calendar| }} --}}    
     <h2>Welcome To The Bill$ Budget App!</h2>
     <div class="update-budget">
        <button class="btn btn-primary" type="submit">Update Budget</button>
@@ -9,8 +9,7 @@
         <button class="btn btn-primary" type="submit">Add any purchases</button>
         {{!-- add button to add purchases --}}
     </div>
-    <div id="calendar" style="height: 600px"></div>
-    <script src="/js/calendar.js"></script>
-    <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.ie11.min.js"></script>
-      
+    <div id='calendar'></div>
+    <script src="/calendar.js"></script>
+    <script src='/calendar/lib/main.js'></script>
 {{!-- {{/each}} --}}
