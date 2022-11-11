@@ -1,4 +1,6 @@
-const updateBudgethandler = async (event) => {
+// const Noty = require('noty');
+
+const updateBudgetHandler = async (event) => {
     event.preventDefault();
 
     const newBudget = documet.querySelector('#updateBudget').value.trim();
@@ -11,9 +13,14 @@ const updateBudgethandler = async (event) => {
         });
 
         if (response.ok) {
-            document.location.replace('/budget');
+            document.location.replace('/api/budget');
         } else {
             alert(response.statusText);
+            // new Noty({
+            //     theme: 'bootstrap-v4',
+            //     text     : response.statusText,
+            //     container: '.custom-container'
+            // }).show();
         }
     }
 };
@@ -21,4 +28,4 @@ const updateBudgethandler = async (event) => {
 
 document
 .querySelector('.update-budget')
-.addEventListener('submit', loginFormHandler);
+.addEventListener('submit', updateBudgetHandler);
