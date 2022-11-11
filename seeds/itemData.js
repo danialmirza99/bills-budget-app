@@ -22,6 +22,14 @@ const itemData = [
     {
         name: 'electric bill',
         due_date: '2022/11/01',
+        amount: 60.34,
+        cost_id: 1,
+        user_id: 1
+    },
+
+    {
+        name: 'electric bill',
+        due_date: '2022/11/01',
         amount: 22.34,
         cost_id: 2,
         user_id: 2
