@@ -7,12 +7,27 @@
     <h2> Your remaining budget is {{remaining}} $ </h2>
 </div>
 
+{{!-- <div class="add-budget">
+    <input class="form-text form-control form-control-sm col-12" placeholder="Enter your budget" name="budget"
+        id="addBudget" type="text"></input>
+    <button type="button" class="btn btn-success" id="submit"> Add Budget </button>
+</div> --}}
+<form class="update-budget">
+    <div class="form-group col-6">
+        <label for="updateBudget"> Your New Budget:</label>
+        <input class="form-input" type="text" id="updateBudget" />
+        <button type="button" class="btn btn-success" id="submit"> Update Budget </button>
+    </div>
+</form>
 
-<div class="update-budget">
-    <input class="form-text form-control form-control-sm col-12" placeholder="Enter new budget" name="budget"
-        id="updateBudget" type="text"></input>
-    <button type="button" class="btn btn-success" id="submit"> Update Budget </button>
-</div>
+<form class="add-budget">
+    <div class="form-group">
+        <label for="addBudget"> Your New Budget:</label>
+        <input class="form-input" type="text" id="addBudget" />
+        <button type="button" class="btn btn-success" id="submit"> Add Budget </button>
+    </div>
+</form>
 
 
-<script src="/js/update-budget.js"></script>
+
+<script src="\js\update-budget.js"></script>
