@@ -1,0 +1,32 @@
+<div class="cost">
+    <p>This Month's Current Spent: ${{total}}</p>
+</div>
+
+
+
+
+{{!-- <div class="add-cost" >
+    <input class="form-text form-control form-control-sm col-12" placeholder="Add a new cost" name="cost" id="addCost"
+        type="text"></input>
+    <button type="button" class="btn btn-success" id="submit"> Add Cost </button>
+</div> --}}
+
+<form class="add-cost">
+      <div class="form-group">
+        <label for="bill-name">Bill Name:</label>
+        <input class="form-input" type="text" id="bill-name" />
+      </div>
+      <div class="form-group">
+        <label for="bill-amount">Amount:</label>
+        <input class="form-input" type="text" id="bill-amount" />
+      </div>
+       <div class="form-group">
+        <label for="bill-due-date">Due Date:</label>
+        <input class="form-input" type="text" id="bill-due-date" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Add Cost</button>
+      </div>
+    </form>
+
+    <script src="/js/add-cost.js"></script>
