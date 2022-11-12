@@ -36,14 +36,17 @@ const signupFormHandler = async (event) => {
         if (response.ok) {
             document.location.replace('/');
         } 
-       else if(response.username==null){
-            alert("Username is taken");
-        }
-        else{
+        else if(response.message=="Validation len on password failed"){
             alert("Password must be at least 8 characters and contain letters and numbers ");
         }
-    }
-};
+        else if(response.username==null){
+            console.log(response)
+            alert("Username is taken");
+        }
+        
+        }
+    };
+
 
 
 document
