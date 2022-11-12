@@ -2,17 +2,17 @@
 const updateBudgetHandler = async (event) => {
     event.preventDefault();
 
-    const newBudget = document.querySelector('#updateBudget').value.trim();
+    const budget_limit = document.querySelector('#updateBudget').value.trim();
 
-    if (newBudget) {
+    if (budget_limit) {
         const response = await fetch('/api/budget', {
-            method: 'POST',
-            body: JSON.stringify({ newBudget }),
+            method: 'PUT',
+            body: JSON.stringify({ budget_limit }),
             headers: { 'Content-Type': 'application/json' },
         });
 
         if (response.ok) {
-            document.location.replace('/api/budget');
+            document.location.replace('/budget');
         } else {
             alert(response.statusText);
         }
@@ -20,6 +20,31 @@ const updateBudgetHandler = async (event) => {
 };
 
 
+// const addBudgetHandler = async (event) => {
+//     event.preventDefault();
+
+//     const newBudget = document.querySelector('#addBudget').value.trim();
+
+//     if (newBudget) {
+//         const response = await fetch('/api/budget', {
+//             method: 'POST',
+//             body: JSON.stringify({ newBudget }),
+//             headers: { 'Content-Type': 'application/json' },
+//         });
+
+//         if (response.ok) {
+//             document.location.replace('/budget');
+//         } else {
+//             alert(response.statusText);
+//         }
+//     }
+// };
+
+
 document
 .querySelector('.update-budget')
-.addEventListener('submit', updateBudgetHandler);
+.addEventListener('click', updateBudgetHandler);
+
+// document
+// .querySelector('.add-budget')
+// .addEventListener('click', addBudgetHandler);
