@@ -64,7 +64,7 @@ router.get('/budget', withAuth, async (req, res) => {
 
     let total = func.sum(cost);
     const remaining = user.budget.budget_limit - total;
-    res.render('budget', { ...user, total, remaining });
+    res.render('budget', { ...user, total, remaining,logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }
