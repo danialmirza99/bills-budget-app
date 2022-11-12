@@ -72,11 +72,35 @@ router.get('/budget', withAuth, async (req, res) => {
 
 router.get('/cost', withAuth, async (req, res) => {
   try {
-    res.render('cost');
+    let today = new Date();
+    let month = today.getMonth() + 1;
+    let year = today.getFullYear();
+
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: { model: Item },     
+    });
+
+    const user = userData.get({ plain: true });
+    const items = user.items;
+    const dates = items.map((item) => item.due_date);
+
+    const indexArr = func.getIndex(arrDates(dates), year, month);
+
+    const amounts = items.map((item) => item.amount);
+    const cost = func.findAmounts(indexArr, amounts);
+
+    let total = func.sum(cost);
+    res.render('cost', {
+      ...user,
+      total,
+      logged_in: true
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
     
 
 
