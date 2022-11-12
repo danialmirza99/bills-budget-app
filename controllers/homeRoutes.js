@@ -4,13 +4,6 @@ const { User, Budget, Item, Cost } = require('../models');
 const withAuth = require('../utils/auth');
 const func = require('../utils/functions');
 
-const arrDates = (arr) => {
-  for (let i = 0; i < arr.length; i++) {
-    arr[i] = arr[i].split("/");
-  }
-  return arr;
-}
-
 router.get('/', async (req, res) => {
   try {
     const budgetData = await Budget.findAll({
@@ -57,7 +50,7 @@ router.get('/budget', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(arrDates(dates), year, month);
+    const indexArr = func.getIndex(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
     const cost = func.findAmounts(indexArr, amounts);
@@ -85,7 +78,7 @@ router.get('/cost', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(arrDates(dates), year, month);
+    const indexArr = func.getIndex(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
     const cost = func.findAmounts(indexArr, amounts);
@@ -108,6 +101,7 @@ router.get('/profile', withAuth, async (req, res) => {
   try {
     let today = new Date();
     let month = today.getMonth() + 1;
+    let monthName = func.getMonthName(month);
     let year = today.getFullYear();
 
     const userData = await User.findByPk(req.session.user_id, {
@@ -119,21 +113,66 @@ router.get('/profile', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(arrDates(dates), year, month);
+    const indexArr = func.getIndex(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
     const cost = func.findAmounts(indexArr, amounts);
+    const selectedItems = func.findAmounts(indexArr, items);
 
     let total = func.sum(cost);
+    let yrtotal = func.sum(amounts);
 
     res.render('profile', {
       ...user,
+      monthName,
+      year,
       total,
+      yrtotal,
+      selectedItems,
       logged_in: true
     });
   }
   catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.get('/profile/month/:month', withAuth, async (req, res) => {
+  try {
+    let today = new Date();
+    let month = req.params.month;
+    let monthName = func.getMonthName(month);
+    let year = today.getFullYear();
+
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Budget }, { model: Item }],
+    });
+
+    const user = userData.get({ plain: true });
+    const items = user.items;
+    const dates = items.map((item) => item.due_date);
+
+    const indexArr = func.getIndex(func.arrDates(dates), year, month);
+
+    const amounts = items.map((item) => item.amount);
+    const cost = func.findAmounts(indexArr, amounts);
+    const selectedItems = func.findAmounts(indexArr, items);
+
+    let total = func.sum(cost);
+    let yrtotal = func.sum(amounts);
+
+    res.render('profile', {
+      ...user,
+      monthName,
+      year,
+      total,
+      yrtotal,
+      selectedItems,
+      logged_in: true
+    });
+  } catch (err) {
+      res.status(500).json(err);
   }
 });
 
