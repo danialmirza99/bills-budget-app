@@ -120,12 +120,14 @@ router.get('/profile', withAuth, async (req, res) => {
     const selectedItems = func.findAmounts(indexArr, items);
 
     let total = func.sum(cost);
+    let yrtotal = func.sum(amounts);
 
     res.render('profile', {
       ...user,
       monthName,
       year,
       total,
+      yrtotal,
       selectedItems,
       logged_in: true
     });
@@ -158,12 +160,14 @@ router.get('/profile/month/:month', withAuth, async (req, res) => {
     const selectedItems = func.findAmounts(indexArr, items);
 
     let total = func.sum(cost);
+    let yrtotal = func.sum(amounts);
 
     res.render('profile', {
       ...user,
       monthName,
       year,
       total,
+      yrtotal,
       selectedItems,
       logged_in: true
     });

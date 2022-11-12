@@ -8,7 +8,7 @@
 
 <div class="profile-cost-option-card">
     <form class="profile-cost-month">
-        <label>Select the month to view spendings by month:</label>
+        <label>Select another month to view spendings:</label>
         <select name="cost-months" id="cost-months">
             <option value="01">January</option>
             <option value="02">February</option>
@@ -40,16 +40,12 @@
 <p>No items this month</p>
 {{/if}}
 
+<div class="profile-cost">
+    <p>Amount Spent in {{year}}: ${{yrtotal}}</p>
+</div>
 
 <div class="profile-cost-option-card">
-    <form class="profile-cost-year">
-        <label>Select the year to view spendings by year:</label>
-        <select id="cost-year">
-            <option value="0">This Year</option>
-            <option value="-1">Previous Year</option>
-        </select>
-        <button type="submit">Submit</button>
-    </form>
+ <button type="submit">View Previous Year's Spendings</button>
 </div>
 
 <script src="/js/profile.js"></script>
