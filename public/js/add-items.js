@@ -1,7 +1,10 @@
-const getItems = document.getElementById("add-item");
-getItems.addEventListener("click", addItem);
+const addItem = document.getElementById("#add-item");
 
-function addItem() {
-    document.getElementsByClassName("item-list").innerHTML = "Hello World";
-    console.log("test")
+const addItems = async (event) => {
+    event.preventDefault();
+
+    const items = document.querySelector("#addItem");
+    if (items){
+        
+    }
 }
