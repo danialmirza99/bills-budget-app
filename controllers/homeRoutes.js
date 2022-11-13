@@ -50,10 +50,10 @@ router.get('/budget', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(func.arrDates(dates), year, month);
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
-    const cost = func.findAmounts(indexArr, amounts);
+    const cost = func.useIndex(indexArr, amounts);
 
     let total = func.sum(cost);
     const remaining = user.budget.budget_limit - total;
@@ -84,10 +84,10 @@ router.get('/cost', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(func.arrDates(dates), year, month);
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
-    const cost = func.findAmounts(indexArr, amounts);
+    const cost = func.useIndex(indexArr, amounts);
 
     let total = func.sum(cost);
     res.render('cost', {
@@ -99,6 +99,8 @@ router.get('/cost', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+    
 
 
 router.get('/profile', withAuth, async (req, res) => {
@@ -117,11 +119,11 @@ router.get('/profile', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(func.arrDates(dates), year, month);
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
-    const cost = func.findAmounts(indexArr, amounts);
-    const selectedItems = func.findAmounts(indexArr, items);
+    const cost = func.useIndex(indexArr, amounts);
+    const selectedItems = func.useIndex(indexArr, items);
 
     let total = func.sum(cost);
     let yrtotal = func.sum(amounts);
@@ -158,11 +160,11 @@ router.get('/profile/month/:month', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(func.arrDates(dates), year, month);
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
-    const cost = func.findAmounts(indexArr, amounts);
-    const selectedItems = func.findAmounts(indexArr, items);
+    const cost = func.useIndex(indexArr, amounts);
+    const selectedItems = func.useIndex(indexArr, items);
 
     let total = func.sum(cost);
     let yrtotal = func.sum(amounts);
@@ -174,12 +176,55 @@ router.get('/profile/month/:month', withAuth, async (req, res) => {
       total,
       yrtotal,
       selectedItems,
-      logged_in: true
+      logged_in: true,
+      month_view: true
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+router.get('/profile/year/:year', withAuth, async (req, res) => {
+  try {
+    let today = new Date();
+    let month = today.getMonth() + 1;
+    let monthName = func.getMonthName(month);
+    let year = req.params.year;
+    console.log(year);
+
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Budget }, { model: Item }],
+    });
+
+    const user = userData.get({ plain: true });
+    const items = user.items;
+    const dates = items.map((item) => item.due_date);
+
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
+    const indexArrYear = func.indexMatchYear(func.arrDates(dates), year);
+
+    const amounts = items.map((item) => item.amount);
+    const cost = func.useIndex(indexArr, amounts);
+    const yearItems = func.useIndex(indexArrYear, items);
+
+    let total = func.sum(cost);
+    let yrtotal = func.sum(amounts);
+
+    res.render('profile', {
+      ...user,
+      monthName,
+      year,
+      total,
+      yrtotal,
+      yearItems,
+      logged_in: true,
+      year_view: true
+    });
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
