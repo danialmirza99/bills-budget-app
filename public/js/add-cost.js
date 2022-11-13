@@ -1,3 +1,5 @@
+// const fs = require("fs");
+
 function pickdate() {
     $("#bill-due-date").datepicker({
         dateFormat: "yy/mm/dd"
@@ -26,6 +28,19 @@ const addCostHandler = async (event) => {
             alert(response.statusText);
         }
     }
+
+    const item = {
+        title: newBill,
+        start: newDueDate
+    }
+    console.log(item);
+    const data = JSON.stringify(item);
+    fs.writeFile('../json/bills.json', data, err => {
+        if (err) {
+          throw err
+        }
+        console.log('JSON data is saved.')
+      })
 };
 
 
