@@ -7,16 +7,6 @@ const func = require('../utils/functions');
 
 router.get('/', async (req, res) => {
   try {
-    // const itemData = await Item.findAll({
-    //   include: [
-    //     {
-    //       model: User,
-    //       attributes: ['username'],
-    //     },
-    //   ],
-    // });
-    // const allItems = itemData.map((item) => item.get({ plain: true }));
-    // console.log(allItems);
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Item }],
@@ -24,24 +14,10 @@ router.get('/', async (req, res) => {
     
     if(userData !== null){
       const user = userData.get({plain:true});
-      console.log(user);
       const calObj = [];
       const items = user.items;
       const names = items.map((item) => item.name)
-      // console.log(names);
       const dueDate = items.map((item) => item.due_date)
-
-
-      // console.log(dueDate);
-      // function cleanObj(object){
-      //   let calObj = object;
-      //   delete calObj[id];
-      //   delete calObj[amount];
-      //   delete calObj[user_id];
-      //   return calObj;
-      // }
-      // const newObj = cleanObj(items);
-      // console.log(newObj);
 
       for(let i = 0; i < items.length; i++){
         const itemObj = {};
@@ -49,10 +25,9 @@ router.get('/', async (req, res) => {
         itemObj["start"] = dueDate[i];
         calObj.push(itemObj)
       }
-      console.log(calObj);
       
-      console.log(userData);
-      res.render('homepage', { logged_in: req.session.logged_in })
+      res.render('homepage', { logged_in: req.session.logged_in, calObj: calObj })
+
     }
     else{
       res.render('login')

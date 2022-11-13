@@ -48,6 +48,14 @@ module.exports = {
         return newArr;
     },
 
+    formatDates: (arr) => {
+        let newArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            newArr.push(arr[i].replaceAll("/", "-"));
+        }
+        return newArr;
+    },
+
     getMonthName: (month) => {
         const date = new Date();
         date.setMonth(month - 1);
