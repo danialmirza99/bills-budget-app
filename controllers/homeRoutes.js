@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const e = require('express');
 const { response } = require('express');
 const { User, Budget, Item, Cost } = require('../models');
 const withAuth = require('../utils/auth');
@@ -6,17 +7,57 @@ const func = require('../utils/functions');
 
 router.get('/', async (req, res) => {
   try {
-    const budgetData = await Budget.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
-    });
-    const calendar = budgetData.map((budgetCalendar) => budgetCalendar.get({ plain: true }));
+    // const itemData = await Item.findAll({
+    //   include: [
+    //     {
+    //       model: User,
+    //       attributes: ['username'],
+    //     },
+    //   ],
+    // });
+    // const allItems = itemData.map((item) => item.get({ plain: true }));
+    // console.log(allItems);
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Item }],
+    })
+    
+    if(userData !== null){
+      const user = userData.get({plain:true});
+      console.log(user);
+      const calObj = [];
+      const items = user.items;
+      const names = items.map((item) => item.name)
+      // console.log(names);
+      const dueDate = items.map((item) => item.due_date)
 
-    res.render('homepage', { calendar, logged_in: req.session.logged_in })
+
+      // console.log(dueDate);
+      // function cleanObj(object){
+      //   let calObj = object;
+      //   delete calObj[id];
+      //   delete calObj[amount];
+      //   delete calObj[user_id];
+      //   return calObj;
+      // }
+      // const newObj = cleanObj(items);
+      // console.log(newObj);
+
+      for(let i = 0; i < items.length; i++){
+        const itemObj = {};
+        itemObj["title"] = names[i];
+        itemObj["start"] = dueDate[i];
+        calObj.push(itemObj)
+      }
+      console.log(calObj);
+      
+      console.log(userData);
+      res.render('homepage', { logged_in: req.session.logged_in })
+    }
+    else{
+      res.render('login')
+    }
+    
   }
   catch (err) {
     res.status(500).json(err);
@@ -75,7 +116,24 @@ router.get('/budget', withAuth, async (req, res) => {
   }
 });
 
+////////
 
+// router.get('/calendar', async (req, res) => {
+//   try{
+//     const userData = await User.findByPk(req.session.user_id, {
+//       attributes: { exclude: ['password'] },
+//       include: [{ model: Item }],
+//     });
+//     user = userData.get({plain: true});
+//     console.log(user);
+//     res.render('calendar')
+//   }
+//   catch(err){
+//     res.status(500).json(err);
+//   }
+// });
+
+///////
 router.get('/cost', withAuth, async (req, res) => {
   try {
     let today = new Date();
