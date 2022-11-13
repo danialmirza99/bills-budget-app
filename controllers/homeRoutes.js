@@ -7,32 +7,13 @@ const func = require('../utils/functions');
 
 router.get('/', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Item }],
-    })
-    
-    if(userData !== null){
-      const user = userData.get({plain:true});
-      const calObj = [];
-      const items = user.items;
-      const names = items.map((item) => item.name)
-      const dueDate = items.map((item) => item.due_date)
-
-      for(let i = 0; i < items.length; i++){
-        const itemObj = {};
-        itemObj["title"] = names[i];
-        itemObj["start"] = dueDate[i];
-        calObj.push(itemObj)
-      }
-      
-      res.render('homepage', { logged_in: req.session.logged_in, calObj: calObj })
-
-    }
-    else{
-      res.render('login')
-    }
-    
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   attributes: { exclude: ['password'] },
+    //   include: [{ model: Item }],
+    // })
+    res.render('homepage', {
+      logged_in: req.session.logged_in
+    });
   }
   catch (err) {
     res.status(500).json(err);
@@ -91,24 +72,7 @@ router.get('/budget', withAuth, async (req, res) => {
   }
 });
 
-////////
 
-// router.get('/calendar', async (req, res) => {
-//   try{
-//     const userData = await User.findByPk(req.session.user_id, {
-//       attributes: { exclude: ['password'] },
-//       include: [{ model: Item }],
-//     });
-//     user = userData.get({plain: true});
-//     console.log(user);
-//     res.render('calendar')
-//   }
-//   catch(err){
-//     res.status(500).json(err);
-//   }
-// });
-
-///////
 router.get('/cost', withAuth, async (req, res) => {
   try {
     let today = new Date();

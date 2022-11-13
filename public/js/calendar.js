@@ -23,8 +23,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 
     const info = await response.json();
-    console.log(JSON.stringify(info));
-    const x = info;
+    let authInfo;
+    if (info == 'null'){
+      authInfo = {}
+    }
+    else{
+      authInfo = info;
+    }
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialDate: date,
@@ -32,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       selectable: true,
       businessHours: true,
       dayMaxEvents: true,
-      events: x
+      events: authInfo
     });
 
     
