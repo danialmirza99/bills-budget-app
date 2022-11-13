@@ -1,6 +1,6 @@
-const fs = require("fs");
+// const fs = require("fs");
 
-let costObj = fs.readFileSync('../json/bills.json');
+// let costObj = fs.readFileSync('../json/bills.json');
 
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
       businessHours: true,
       dayMaxEvents: true,
       events: [
-        costObj
+        // costObj
       ]
     });
 
