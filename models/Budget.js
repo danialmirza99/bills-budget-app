@@ -15,10 +15,6 @@ Budget.init({
         type: DataTypes.DECIMAL(10,2),
         allowNull:false
     },
-    date:{
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     user_id:{
         type: DataTypes.INTEGER,
         references: {

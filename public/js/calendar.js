@@ -1,14 +1,18 @@
+const fs = require("fs");
+
+let costObj = fs.readFileSync('../json/bills.json');
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialDate: '2020-09-12',
+      initialDate: '2022-11-13',
       editable: true,
       selectable: true,
       businessHours: true,
-      dayMaxEvents: true, // allow "more" link when too many events
+      dayMaxEvents: true,
       events: [
-        
+        costObj
       ]
     });
 

@@ -14,7 +14,7 @@ const loginFormHandler = async (event) => {
         if (response.ok) {
             document.location.replace('/');
         } else {
-            alert(response.statusText);
+            alert("Incorrect Username or Password");
         }
     }
 };
@@ -35,11 +35,16 @@ const signupFormHandler = async (event) => {
 
         if (response.ok) {
             document.location.replace('/');
-        } else {
-            alert(response.statusText);
+        } 
+        else if(response.username==null){
+            console.log(response)
+            alert("Username is taken or Password must be 8 characters containing letters or numbers");
+            console.log(response.message);
         }
+        
     }
 };
+
 
 
 document
