@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialDate: '2022-11-11',
+      initialDate: '2020-09-12',
       editable: true,
       selectable: true,
       businessHours: true,
@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
       ]
     });
+
+    
 
     calendar.render();
   });
