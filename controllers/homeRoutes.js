@@ -57,7 +57,7 @@ router.get('/budget', withAuth, async (req, res) => {
       const cost = func.useIndex(indexArr, amounts);
   
       let total = func.sum(cost);
-      const remaining = user.budget.budget_limit - total;
+      const remaining = parseFloat(user.budget.budget_limit - total).toFixed(2);
   
       res.render('budget', {
         ...user,
