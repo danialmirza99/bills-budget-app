@@ -46,23 +46,29 @@ router.get('/budget', withAuth, async (req, res) => {
       include: [{ model: Budget }, { model: Item }],
     });
 
-    const user = userData.get({ plain: true });
-    const items = user.items;
-    const dates = items.map((item) => item.due_date);
+    if(userData.budget !== null ){
+      const user = userData.get({ plain: true });
+      const items = user.items;
+      const dates = items.map((item) => item.due_date);
+  
+      const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
+  
+      const amounts = items.map((item) => item.amount);
+      const cost = func.useIndex(indexArr, amounts);
+  
+      let total = func.sum(cost);
+      const remaining = user.budget.budget_limit - total;
+  
+      res.render('budget', {
+        ...user,
+        total,
+        remaining,
+        logged_in: true
+      });
+    } else {
+      res.redirect('/profile');
+    }
 
-    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
-
-    const amounts = items.map((item) => item.amount);
-    const cost = func.useIndex(indexArr, amounts);
-
-    let total = func.sum(cost);
-    const remaining = user.budget.budget_limit - total;
-    res.render('budget', {
-      ...user,
-      total,
-      remaining,
-      logged_in: true
-    });
   } catch (err) {
     res.status(500).json(err);
   }
