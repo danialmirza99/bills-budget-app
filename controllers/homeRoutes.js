@@ -126,15 +126,15 @@ router.get('/profile', withAuth, async (req, res) => {
     const dates = items.map((item) => item.due_date);
 
     const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
+    const indexArrYear = func.indexMatchYear(func.arrDates(dates), year);
 
     const amounts = items.map((item) => item.amount);
     const cost = func.useIndex(indexArr, amounts);
     const selectedItems = func.useIndex(indexArr, items);
+    const yearAmounts = func.useIndex(indexArrYear, amounts);
 
     let total = func.sum(cost);
-    let yrtotal = func.sum(amounts);
-
-    console.log(userData.budget);
+    let yrtotal = func.sum(yearAmounts);
 
     let no_budget;
 
@@ -178,13 +178,15 @@ router.get('/profile/month/:month', withAuth, async (req, res) => {
     const dates = items.map((item) => item.due_date);
 
     const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
+    const indexArrYear = func.indexMatchYear(func.arrDates(dates), year);
 
     const amounts = items.map((item) => item.amount);
     const cost = func.useIndex(indexArr, amounts);
     const selectedItems = func.useIndex(indexArr, items);
+    const yearAmounts = func.useIndex(indexArrYear, amounts);
 
     let total = func.sum(cost);
-    let yrtotal = func.sum(amounts);
+    let yrtotal = func.sum(yearAmounts);
 
     res.render('profile', {
       ...user,
@@ -223,10 +225,12 @@ router.get('/profile/year/:year', withAuth, async (req, res) => {
 
     const amounts = items.map((item) => item.amount);
     const cost = func.useIndex(indexArr, amounts);
+
     const yearItems = func.useIndex(indexArrYear, items);
+    const yearAmounts = func.useIndex(indexArrYear, amounts);
 
     let total = func.sum(cost);
-    let yrtotal = func.sum(amounts);
+    let yrtotal = func.sum(yearAmounts);
 
     res.render('profile', {
       ...user,
