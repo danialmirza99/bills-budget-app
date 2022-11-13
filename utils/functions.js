@@ -9,7 +9,7 @@ module.exports = {
         return total;
     },
 
-    findAmounts: (index, arr) => {
+    useIndex: (index, arr) => {
         const amounts = [];
         for (let i = 0; i < index.length; i++) {
             amounts.push(arr[index[i]])
@@ -17,12 +17,23 @@ module.exports = {
         return amounts
     },
 
-    getIndex: (arr, yr, m) => {
+    indexMatchYearMonth: (arr, yr, m) => {
         const indexes = [];
         for (let i = 0; i < arr.length; i++) {
             const itemYear = arr[i][0];
             const itemMonth = arr[i][1];
             if (itemYear == yr && itemMonth == m) {
+                indexes.push(i)
+            }
+        }
+        return indexes;
+    },
+
+    indexMatchYear: (arr, yr) => {
+        const indexes = [];
+        for (let i = 0; i < arr.length; i++) {
+            const itemYear = arr[i][0];
+            if (itemYear == yr ) {
                 indexes.push(i)
             }
         }

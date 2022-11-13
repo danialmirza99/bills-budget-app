@@ -28,16 +28,18 @@
 </div>
 
 
-{{#if selectedItems}}
-{{#each selectedItems as |cost|}}
-<div class="card m-5 pl-3 pt-3">
-    <p>{{cost.name}}</p>
-    <p>{{cost.amount}}</p>
-    <p>{{cost.due_date}}</p>
-</div>
-{{/each}}
-{{else}}
-<p>No items this month</p>
+{{#if month_view}}
+    {{#if selectedItems}}
+    {{#each selectedItems as |cost|}}
+    <div class="card m-5 pl-3 pt-3">
+        <p>{{cost.name}}</p>
+        <p>{{cost.amount}}</p>
+        <p>{{cost.due_date}}</p>
+    </div>
+    {{/each}}
+    {{else}}
+    <p>No items this month</p>
+    {{/if}}
 {{/if}}
 
 <div class="profile-cost">

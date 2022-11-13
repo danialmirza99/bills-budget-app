@@ -50,10 +50,10 @@ router.get('/budget', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(func.arrDates(dates), year, month);
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
-    const cost = func.findAmounts(indexArr, amounts);
+    const cost = func.useIndex(indexArr, amounts);
 
     let total = func.sum(cost);
     const remaining = user.budget.budget_limit - total;
@@ -78,10 +78,10 @@ router.get('/cost', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(func.arrDates(dates), year, month);
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
-    const cost = func.findAmounts(indexArr, amounts);
+    const cost = func.useIndex(indexArr, amounts);
 
     let total = func.sum(cost);
     res.render('cost', {
@@ -113,11 +113,11 @@ router.get('/profile', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(func.arrDates(dates), year, month);
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
-    const cost = func.findAmounts(indexArr, amounts);
-    const selectedItems = func.findAmounts(indexArr, items);
+    const cost = func.useIndex(indexArr, amounts);
+    const selectedItems = func.useIndex(indexArr, items);
 
     let total = func.sum(cost);
     let yrtotal = func.sum(amounts);
@@ -153,11 +153,11 @@ router.get('/profile/month/:month', withAuth, async (req, res) => {
     const items = user.items;
     const dates = items.map((item) => item.due_date);
 
-    const indexArr = func.getIndex(func.arrDates(dates), year, month);
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
 
     const amounts = items.map((item) => item.amount);
-    const cost = func.findAmounts(indexArr, amounts);
-    const selectedItems = func.findAmounts(indexArr, items);
+    const cost = func.useIndex(indexArr, amounts);
+    const selectedItems = func.useIndex(indexArr, items);
 
     let total = func.sum(cost);
     let yrtotal = func.sum(amounts);
@@ -169,7 +169,8 @@ router.get('/profile/month/:month', withAuth, async (req, res) => {
       total,
       yrtotal,
       selectedItems,
-      logged_in: true
+      logged_in: true,
+      month_view: true
     });
   } catch (err) {
       res.status(500).json(err);
