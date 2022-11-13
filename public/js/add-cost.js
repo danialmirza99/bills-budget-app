@@ -1,4 +1,4 @@
-const fs = require("fs");
+// const fs = require("fs");
 
 function pickdate() {
     $("#bill-due-date").datepicker({
@@ -7,6 +7,7 @@ function pickdate() {
 };
 
 pickdate();
+
 
 const addCostHandler = async (event) => {
     event.preventDefault();
