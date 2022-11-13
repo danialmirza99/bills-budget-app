@@ -18,6 +18,26 @@ const viewPrevYear = async () => {
     document.location.replace(`/profile/year/${prevYear}`)
 };
 
+const addBudgetHandler = async (event) => {
+    event.preventDefault();
+
+    const budget_limit = document.querySelector('#addBudget').value.trim();
+
+    if (budget_limit) {
+        const response = await fetch('/api/budget', {
+            method: 'POST',
+            body: JSON.stringify({ budget_limit }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (response.ok) {
+            document.location.replace('/budget');
+        } else {
+            alert(response.statusText);
+        }
+    }
+};
+
 document
     .querySelector('.profile-cost-month')
     .addEventListener('submit', costMonthFormHandler);
@@ -29,3 +49,8 @@ document
 document
     .querySelector('#prev-year-btn')
     .addEventListener('click', viewPrevYear);
+
+    
+document
+.querySelector('.add-budget')
+.addEventListener('click', addBudgetHandler);

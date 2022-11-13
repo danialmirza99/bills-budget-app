@@ -20,31 +20,6 @@ const updateBudgetHandler = async (event) => {
 };
 
 
-// const addBudgetHandler = async (event) => {
-//     event.preventDefault();
-
-//     const newBudget = document.querySelector('#addBudget').value.trim();
-
-//     if (newBudget) {
-//         const response = await fetch('/api/budget', {
-//             method: 'POST',
-//             body: JSON.stringify({ newBudget }),
-//             headers: { 'Content-Type': 'application/json' },
-//         });
-
-//         if (response.ok) {
-//             document.location.replace('/budget');
-//         } else {
-//             alert(response.statusText);
-//         }
-//     }
-// };
-
-
 document
 .querySelector('.update-budget')
 .addEventListener('click', updateBudgetHandler);
-
-// document
-// .querySelector('.add-budget')
-// .addEventListener('click', addBudgetHandler);
