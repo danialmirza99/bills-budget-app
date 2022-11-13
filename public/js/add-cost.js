@@ -1,4 +1,4 @@
-// const fs = require("fs");
+const fs = require("fs");
 
 function pickdate() {
     $("#bill-due-date").datepicker({
@@ -23,24 +23,28 @@ const addCostHandler = async (event) => {
         });
 
         if (response.ok) {
+            console.log(newBill)
+            console.log(newAmount)
+            console.log(newDueDate)
             document.location.replace('/cost');
+            
         } else {
             alert(response.statusText);
         }
     }
 
-    const item = {
-        title: newBill,
-        start: newDueDate
-    }
-    console.log(item);
-    const data = JSON.stringify(item);
-    fs.writeFile('../json/bills.json', data, err => {
-        if (err) {
-          throw err
-        }
-        console.log('JSON data is saved.')
-      })
+    // const item = {
+    //     title: newBill,
+    //     start: newDueDate
+    // }
+    // console.log(item);
+    // const data = JSON.stringify(item);
+    // fs.writeFile('../json/bills.json', data, err => {
+    //     if (err) {
+    //       throw err
+    //     }
+    //     console.log('JSON data is saved.')
+    //   })
 };
 
 
