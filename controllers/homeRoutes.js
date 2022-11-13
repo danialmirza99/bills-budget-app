@@ -46,23 +46,29 @@ router.get('/budget', withAuth, async (req, res) => {
       include: [{ model: Budget }, { model: Item }],
     });
 
-    const user = userData.get({ plain: true });
-    const items = user.items;
-    const dates = items.map((item) => item.due_date);
+    if(userData.budget !== null ){
+      const user = userData.get({ plain: true });
+      const items = user.items;
+      const dates = items.map((item) => item.due_date);
+  
+      const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
+  
+      const amounts = items.map((item) => item.amount);
+      const cost = func.useIndex(indexArr, amounts);
+  
+      let total = func.sum(cost);
+      const remaining = user.budget.budget_limit - total;
+  
+      res.render('budget', {
+        ...user,
+        total,
+        remaining,
+        logged_in: true
+      });
+    } else {
+      res.redirect('/profile');
+    }
 
-    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
-
-    const amounts = items.map((item) => item.amount);
-    const cost = func.useIndex(indexArr, amounts);
-
-    let total = func.sum(cost);
-    const remaining = user.budget.budget_limit - total;
-    res.render('budget', {
-      ...user,
-      total,
-      remaining,
-      logged_in: true
-    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -100,7 +106,7 @@ router.get('/cost', withAuth, async (req, res) => {
   }
 });
 
-    
+
 
 
 router.get('/profile', withAuth, async (req, res) => {
@@ -128,6 +134,16 @@ router.get('/profile', withAuth, async (req, res) => {
     let total = func.sum(cost);
     let yrtotal = func.sum(amounts);
 
+    console.log(userData.budget);
+
+    let no_budget;
+
+    if (userData.budget == null) {
+      no_budget = true
+    } else {
+      no_budget = false
+    }
+
     res.render('profile', {
       ...user,
       monthName,
@@ -135,6 +151,7 @@ router.get('/profile', withAuth, async (req, res) => {
       total,
       yrtotal,
       selectedItems,
+      no_budget,
       logged_in: true
     });
   }

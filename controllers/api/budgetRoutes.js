@@ -16,6 +16,17 @@ router.put('/', withAuth, async (req, res) => {
     }
 });
 
+router.post('/', withAuth, async (req, res) => {
+    try {
+        const addBudget = await Budget.create( {
+            budget_limit: req.body.budget_limit,
+            user_id: req.session.user_id,
+        });
+        res.status(200).json(addBudget);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 
 module.exports = router;

@@ -2,6 +2,16 @@
     <h2>Profile</h2>
 </div>
 
+{{#if no_budget}}
+<form class="add-budget d-flex col-6">
+    <div class="form-group">
+        <label for="addBudget"> Your Budget:</label>
+        <input class="form-input col-6" type="text" id="addBudget" />
+        <button type="button" class="btn btn-primary" id="submit"> Add Budget </button>
+    </div>
+</form>
+{{/if}}
+
 <div class="container">
     <div class="row">
         <div class="profile-budget text-center">
