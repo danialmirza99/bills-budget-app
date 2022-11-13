@@ -1,3 +1,10 @@
+function pickdate() {
+    $("#bill-due-date").datepicker({
+        dateFormat: "yy/mm/dd"
+    });
+};
+
+pickdate();
 
 const addCostHandler = async (event) => {
     event.preventDefault();
@@ -9,7 +16,7 @@ const addCostHandler = async (event) => {
     if (newBill && newAmount && newDueDate) {
         const response = await fetch('/api/cost', {
             method: 'POST',
-            body: JSON.stringify({ newBill, newAmount, newDueDate  }),
+            body: JSON.stringify({ newBill, newAmount, newDueDate }),
             headers: { 'Content-Type': 'application/json' },
         });
 
@@ -23,5 +30,5 @@ const addCostHandler = async (event) => {
 
 
 document
-.querySelector('.add-cost')
-.addEventListener('submit', addCostHandler);
+    .querySelector('.add-cost')
+    .addEventListener('submit', addCostHandler);
