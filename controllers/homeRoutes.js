@@ -57,11 +57,17 @@ router.get('/budget', withAuth, async (req, res) => {
 
     let total = func.sum(cost);
     const remaining = user.budget.budget_limit - total;
-    res.render('budget', { ...user, total, remaining,logged_in: true });
+    res.render('budget', {
+      ...user,
+      total,
+      remaining,
+      logged_in: true
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 router.get('/cost', withAuth, async (req, res) => {
   try {
@@ -71,7 +77,7 @@ router.get('/cost', withAuth, async (req, res) => {
 
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: { model: Item },     
+      include: { model: Item },
     });
 
     const user = userData.get({ plain: true });
@@ -137,6 +143,7 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
+
 router.get('/profile/month/:month', withAuth, async (req, res) => {
   try {
     let today = new Date();
@@ -173,7 +180,7 @@ router.get('/profile/month/:month', withAuth, async (req, res) => {
       month_view: true
     });
   } catch (err) {
-      res.status(500).json(err);
+    res.status(500).json(err);
   }
 });
 
@@ -261,5 +268,6 @@ router.get('/profile/year/prev', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;
