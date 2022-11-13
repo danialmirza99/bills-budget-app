@@ -100,7 +100,7 @@ router.get('/cost', withAuth, async (req, res) => {
   }
 });
 
-    
+
 
 
 router.get('/profile', withAuth, async (req, res) => {
@@ -128,6 +128,16 @@ router.get('/profile', withAuth, async (req, res) => {
     let total = func.sum(cost);
     let yrtotal = func.sum(amounts);
 
+    console.log(userData.budget);
+
+    let no_budget;
+
+    if (userData.budget == null) {
+      no_budget = true
+    } else {
+      no_budget = false
+    }
+
     res.render('profile', {
       ...user,
       monthName,
@@ -135,6 +145,7 @@ router.get('/profile', withAuth, async (req, res) => {
       total,
       yrtotal,
       selectedItems,
+      no_budget,
       logged_in: true
     });
   }
