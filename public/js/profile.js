@@ -5,12 +5,17 @@ const costMonthFormHandler = async (event) => {
     document.location.replace(`/profile/month/${month}`)
 };
 
-const viewYear = async (event) => {
-    document.location.replace(`/profile/year`)
+const viewYear = async () => {
+    let today = new Date();
+    let year = today.getFullYear();
+    document.location.replace(`/profile/year/${year}`)
 };
 
-const viewPrevYear = async (event) => {
-    document.location.replace(`/profile/year/prev`)
+const viewPrevYear = async () => {
+    let today = new Date();
+    let year = today.getFullYear();
+    let prevYear = year-1
+    document.location.replace(`/profile/year/${prevYear}`)
 };
 
 document
