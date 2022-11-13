@@ -177,4 +177,46 @@ router.get('/profile/month/:month', withAuth, async (req, res) => {
   }
 });
 
+router.get('/profile/year', withAuth, async (req, res) => {
+  try {
+    let today = new Date();
+    let month = today.getMonth() + 1;
+    let monthName = func.getMonthName(month);
+    let year = today.getFullYear();
+
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Budget }, { model: Item }],
+    });
+
+    const user = userData.get({ plain: true });
+    const items = user.items;
+    const dates = items.map((item) => item.due_date);
+
+    const indexArr = func.indexMatchYearMonth(func.arrDates(dates), year, month);
+    const indexArrYear = func.indexMatchYear(func.arrDates(dates), year);
+
+    const amounts = items.map((item) => item.amount);
+    const cost = func.useIndex(indexArr, amounts);
+    const yearItems = func.useIndex(indexArrYear, items);
+
+    let total = func.sum(cost);
+    let yrtotal = func.sum(amounts);
+
+    res.render('profile', {
+      ...user,
+      monthName,
+      year,
+      total,
+      yrtotal,
+      yearItems,
+      logged_in: true,
+      year_view: true
+    });
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

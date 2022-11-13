@@ -46,9 +46,24 @@
     <p>Amount Spent in {{year}}: ${{yrtotal}}</p>
 </div>
 
-<div class="profile-cost-option-card">
- <button type="submit">View Previous Year's Spendings</button>
+<div class="profile-year">
+ <button id="year-btn">View All Spendings This Year</button>
+ <button id="prev-year-btn">View All Spending From Previous Year</button>
 </div>
+
+{{#if year_view}}
+    {{#if yearItems}}
+    {{#each yearItems as |item|}}
+    <div class="card m-5 pl-3 pt-3">
+        <p>{{item.name}}</p>
+        <p>{{item.amount}}</p>
+        <p>{{item.due_date}}</p>
+    </div>
+    {{/each}}
+    {{else}}
+    <p>No items this year</p>
+    {{/if}}
+{{/if}}
 
 <script src="/js/profile.js"></script>
 
