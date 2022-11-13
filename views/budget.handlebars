@@ -1,30 +1,21 @@
 <div class="container">
-<div class="total-budget col-12 pt-3 text-center">
-    <h2> Your total budget is <b>${{budget.budget_limit}}</b></h2>
-</div>
-
-
-<div class="current-budget col-12 pb-5 text-center">
-    <h2> Your remaining budget is <b>${{remaining}}</b></h2>
-</div>
-
-
-<form class="update-budget d-flex col-6">
-    <div class="form-group text-center">
-        <label class ="text-center"for="updateBudget"> Your New Budget:</label>
-        <input class="form-input col-6" type="text" id="updateBudget" />
-        <button type="button" class="btn btn-primary" id="submit"> Update Budget </button>
+    <div class="total-budget col-12 pt-3 text-center">
+        <h2> Your total budget is <b>${{budget.budget_limit}}</b></h2>
     </div>
-</form>
 
-{{!-- <form class="add-budget">
-    <div class="form-group col-6">
-        <label for="addBudget"> Your New Budget:</label>
-        <input class="form-input" type="text" id="addBudget" />
-        <button type="button" class="btn btn-success" id="submit"> Add Budget </button>
+
+    <div class="current-budget col-12 pb-5 text-center">
+        <h2> Your remaining budget is <b>${{remaining}}</b></h2>
     </div>
-</form> --}}
 
+
+    <form class="update-budget text-center">
+        <div class="form-group text-center">
+            <label class="text-center" for="updateBudget"> Your New Budget:</label>
+            <input class="form-input row mt-2 col-sm" type="text" id="updateBudget" />
+            <button type="button" class="btn btn-primary" id="submit"> Update Budget </button>
+        </div>
+    </form>
 </div>
 
 <script src="\js\update-budget.js"></script>
