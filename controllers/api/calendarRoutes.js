@@ -4,13 +4,17 @@ const { User, Item } = require('../../models');
 const withAuth = require('../../utils/auth');
 const func = require('../../utils/functions')
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
             include: [{ model: Item }],
           })
           
+          if(userData !== null){
+
+          
+
             const user = userData.get({plain:true});
             
             const items = user.items;
@@ -29,9 +33,15 @@ router.post('/', withAuth, async (req, res) => {
               }
               return calObj;
             }
+            
 
             const costList = await createObj(items, names, formattedDates);
             res.status(200).send(costList);
+          }
+
+          else{
+            res.status(200).send('null');
+          }
     } catch (err) {
         res.status(500).json(err);
     }
