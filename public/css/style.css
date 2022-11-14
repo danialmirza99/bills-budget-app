@@ -37,3 +37,18 @@ main {
   .navbar-custom{
     background-color: #93c47dff
   }
+
+  footer{
+    text-align: center;
+    position:relative;
+    top: 50px;
+    font-family: lobster;
+  }
+
+  #bill{
+    color: #f00;
+  }
+
+  #dollar-sign{
+    color: #38761d;
+  }
