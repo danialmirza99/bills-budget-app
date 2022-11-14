@@ -6,14 +6,6 @@ let date = `${year}-${month}-${day}`
 
 
 document.addEventListener('DOMContentLoaded', async function() {
-    // const userData = await User.findByPk(req.session.user_id, {
-    //   attributes: {exclude: ['password']},
-    //   include: {model: Item}
-    // });
-    // const user = userData.get({plain: true});
-    // console.log(user);
-
-    // document.location.replace('/calendar')
 
     var calendarEl = document.getElementById('calendar');
 
