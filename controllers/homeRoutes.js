@@ -7,10 +7,6 @@ const func = require('../utils/functions');
 
 router.get('/', async (req, res) => {
   try {
-    // const userData = await User.findByPk(req.session.user_id, {
-    //   attributes: { exclude: ['password'] },
-    //   include: [{ model: Item }],
-    // })
     res.render('homepage', {
       logged_in: req.session.logged_in
     });
@@ -207,7 +203,6 @@ router.get('/profile/year/:year', withAuth, async (req, res) => {
     let month = today.getMonth() + 1;
     let monthName = func.getMonthName(month);
     let year = req.params.year;
-    console.log(year);
 
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
