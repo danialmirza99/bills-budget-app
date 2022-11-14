@@ -18,8 +18,9 @@ router.post('/', async (req, res) => {
             const user = userData.get({plain:true});
             
             const items = user.items;
-            const names = await items.map((item) => item.name)
-            const dueDate = await items.map((item) => item.due_date)
+            const names = await items.map((item) => item.name);
+            const dueDate = await items.map((item) => item.due_date);
+            const amounts = await items.map((item) => item.amount);
             const formattedDates = await func.formatDates(dueDate);
             
       
@@ -27,7 +28,7 @@ router.post('/', async (req, res) => {
               const calObj = [];
               for(let i = 0; i < items.length; i++){
                 const itemObj = {};
-                itemObj["title"] = names[i];
+                itemObj["title"] = `${names[i]}: $${amounts[i]}`;
                 itemObj["start"] = dueDate[i];
                 calObj.push(itemObj)
               }
