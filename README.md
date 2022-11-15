@@ -67,6 +67,9 @@ Please refer to the LICENSE in the repo.
 
 [Github Repository Link](https://github.com/danialmirza99/bills-budget-app/)
 
+[Full Calendar Link](https://fullcalendar.io/)
+
+
 ## Screenshots
 
 ### Login/Signup Page
