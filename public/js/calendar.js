@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialDate: date,
-      editable: true,
       selectable: true,
       businessHours: true,
       dayMaxEvents: true,
