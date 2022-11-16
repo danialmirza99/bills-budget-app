@@ -30,6 +30,7 @@ Test out our site on https://bills-manager2022.herokuapp.com/ by logging in with
 username as "user" and password as "password".
 
 Username: user
+
 Password: password
 
 ## Links
@@ -89,23 +90,43 @@ Password: password
 ## Features
 
 1) Allows new visitors to sign up
+
 ![Sign Up Gif](./public/images/signup.gif)
+
 2) Allow users to login and logout of the application
+
 ![Login/Logout Gif](./public/images/login-logout.gif)
+
 3) Allow new users to add a monthly budget
+
 ![Add Budget Gif](./public/images/add-budget.gif)
+
 4) Allow users to update a monthly budget
+
 ![Update Budget Gif](./public/images/update-budget.gif)
+
 5) Allow users to add previous, current, and future payments
+
 ![Add Payments Gif](./public/images/add-payments.gif)
+
 6) Display payments on a Calendar
+
 ![View of Payments on Calendar Image](./public/images/payments-on-cal.png)
+
 7) Multiple pages, including: home, profile, budget, cost, and login/signup
+
+![Navigation Bar Image](./public/images/nav-bar.png)
+
 8) Allow users to view payments from months/years different from the current
+
 ![View of Payments From Other Months/Years Gif](./public/images/profile-views.gif)
+
 9) View total remaining budget after including spendings
+
 ![View Remaining Budget](./public/images/remaining-budget.png)
+
 10) Allow navigation to previous and upcoming months
+
 ![Navigate Calendar Gif](./public/images/calendar-views.gif)
 
 ## Code Snippets
